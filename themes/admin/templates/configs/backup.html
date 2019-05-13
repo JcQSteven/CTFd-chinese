@@ -1,0 +1,52 @@
+<div role="tabpanel" class="tab-pane config-section" id="backup">
+	<ul class="nav nav-tabs mb-3" role="tablist">
+		<li class="nav-item">
+			<a class="nav-link active" href="#export-ctf" aria-controls="export-ctf" role="tab"
+			   data-toggle="tab">导出</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="#import-ctf" aria-controls="import-ctf" role="tab" data-toggle="tab">导入</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link " href="#save-csv" aria-controls="save-csv" role="tab" data-toggle="tab">下载CSV</a>
+		</li>
+	</ul>
+	<div class="tab-content">
+		<div role="tabpanel" class="tab-pane active" id="export-ctf">
+			<div class="form-group">
+				<p>导出是CTF当前状态的存档。它们可以重新导入到其他CTFD实例中，或者由脚本和第三方用于计算统计信息。</p>
+				<p>要下载导出，请单击下面的按钮。</p>
+			</div>
+			<div class="form-group">
+				<a href="{{ url_for('admin.export_ctf') }}" id="export-button" class="btn btn-warning">导出</a>
+			</div>
+		</div>
+		<div role="tabpanel" class="tab-pane" id="import-ctf">
+			<div class="form-group">
+				<p>您可以通过在下面上载保存的CTFD导出来导入它们。这将彻底清除现有的CTFD实例，所有数据都将被导入的数据替换。您应该只导入您信任的数据！</p>
+
+				<div class="alert alert-warning" role="alert">
+					导入CTF将完全擦除现有数据
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="container-files">导入文件</label>
+				<input class="form-control-file" type="file" name="backup" id="import-file" accept=".zip">
+			</div>
+			<input id="import-button" type="submit" class="btn btn-warning" value="导入">
+		</div>
+		<div role="tabpanel" class="tab-pane" id="save-csv">
+			<form method="GET" action="{{ url_for('admin.export_csv') }}">
+				<div class="form-group">
+					<label for="container-files">数据库表</label>
+					<select class="form-control" name="table">
+						{% for table in database_tables %}
+							<option value="{{ table }}">{{ table }}</option>
+						{% endfor %}
+					</select>
+				</div>
+				<input type="submit" class="btn btn-warning" value="下载CSV">
+			</form>
+		</div>
+	</div>
+</div>

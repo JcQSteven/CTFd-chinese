@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block content %}
+	<div class="jumbotron">
+		<div class="container">
+			<h1>团队</h1>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 offset-md-3 text-center">
+				<p>欢迎来到 {{ get_ctf_name() }}!</p>
+				<p>
+					为了正常参与其中，您必须加入或创建一个团队。
+				</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6 offset-md-3 text-center">
+				<a class="btn btn-primary w-100" href="{{ url_for('auth.oauth_login') }}">与正式团队合作</a>
+			</div>
+		</div>
+		<div class="row pt-3">
+			<div class="col-md-3 offset-md-3 text-center">
+				<a class="btn btn-light w-100" href="{{ url_for('teams.join') }}">加入非官方团队</a>
+			</div>
+			<div class="col-md-3 text-center">
+				<a class="btn btn-light w-100" href="{{ url_for('teams.new') }}">创建非官方团队</a>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block scripts %}
+	<script src="{{ url_for('views.themes', path='js/vendor/plotly.min.js') }}"></script>
+	<script src="{{ url_for('views.themes', path='js/utils.js') }}"></script>
+	{% if solves %}
+		<script src="{{ url_for('views.themes', path='js/team.js') }}"></script>
+	{% endif %}
+{% endblock %}

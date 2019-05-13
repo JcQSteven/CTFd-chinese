@@ -1,0 +1,47 @@
+<div role="tabpanel" class="tab-pane config-section" id="accounts">
+	<form method="POST" autocomplete="off" class="w-100">
+
+		<div class="form-group">
+			<label>
+				邮箱账号白名单
+				<small class="form-text text-muted">
+					逗号分隔的电子邮件域，用户可以在其中注册。
+				</small>
+			</label>
+			<input class="form-control" id='domain-whitelist' name='domain_whitelist' type='text'
+				   placeholder=""
+				   {% if domain_whitelist is defined and domain_whitelist != None %}value="{{ domain_whitelist }}"{% endif %}>
+			<small class="form-text text-muted">
+				例如： hzda.org,gmail.com,163.com
+			</small>
+		</div>
+
+		<div class="form-group">
+			<label>
+				邮箱验证<br>
+				<small class="form-text text-muted">
+					设置用户是否必须在使用平台前确认其电子邮件地址
+				</small>
+			</label>
+			<select class="form-control" name="verify_emails">
+				<option value="true" {% if verify_emails == True %}selected{% endif %}>启用</option>
+				<option value="false" {% if verify_emails == False or verify_emails == None %}selected{% endif %}>禁用</option>
+			</select>
+		</div>
+
+		<div class="form-group">
+			<label>
+				用户名更改<br>
+				<small class="form-text text-muted">
+					控制用户是否可以更改其名称
+				</small>
+			</label>
+			<select class="form-control" name="name_changes">
+				<option value="true" {% if name_changes == True or name_changes == None %}selected{% endif %}>启用</option>
+				<option value="false" {% if name_changes == False %}selected{% endif %}>禁用</option>
+			</select>
+		</div>
+
+		<button type="submit" class="btn btn-md btn-primary float-right">生效</button>
+	</form>
+</div>

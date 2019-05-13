@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block content %}
+	<div class="jumbotron">
+		<div class="container">
+			<h1>安装</h1>
+		</div>
+	</div>
+	<div class="container">
+		<div class="col-md-6 offset-md-3">
+			<h2 class="text-center">平台配置</h2>
+			{% for error in errors %}
+				<div class="submit-row">
+					<div class="alert alert-danger alert-dismissable" role="alert">
+						<span class="sr-only">错误:</span>
+						{{ error }}
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+								aria-hidden="true">×</span></button>
+					</div>
+				</div>
+			{% endfor %}
+			<form method="post" accept-charset="utf-8" autocomplete="off" role="form" class="form-horizontal">
+				<input type="hidden" name="nonce" value="{{ nonce }}">
+				{# This nonce is implemented specially in the route itself #}
+				<div class="form-group">
+					<label>
+						平台名称<br>
+						<small class="form-text text-muted">
+							为平台设置名称
+						</small>
+					</label>
+					<input class="form-control" type="text" name="ctf_name"/>
+				</div>
+				<div class="form-group">
+					<label>
+						管理员用户名<br>
+						<small class="form-text text-muted">
+							你的用户名将作为管理员账户
+						</small>
+					</label>
+					<input class="form-control" type="text" name="name"/>
+				</div>
+				<div class="form-group">
+					<label>
+						管理员邮箱<br>
+						<small class="form-text text-muted">
+							你的邮箱将作为管理员邮箱
+						</small>
+					</label>
+					<input class="form-control" type="email" name="email"/>
+				</div>
+				<div class="form-group">
+					<label>
+						管理员密码<br>
+						<small class="form-text text-muted">
+							你的密码将作为管理员密码
+						</small>
+					</label>
+					<input class="form-control" type="password" name="password"/>
+				</div>
+				<div class="form-group">
+					<label>
+						个人模式
+						<small class="form-text text-muted">
+							个人比赛模式<br>
+							指示用户是加入团队玩（团队模式）还是作为自己玩（个人模式）
+						</small>
+					</label>
+					<select class="form-control" name="user_mode">
+						<option value="teams">团队模式</option>
+						<option value="users">个人模式</option>
+					</select>
+				</div>
+				<br/>
+				<div class="submit-row text-center">
+					<button type="submit" id="submit" tabindex="5" class="btn btn-md btn-primary btn-outlined">提交
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block scripts %}
+	<script src="{{ url_for('views.themes', path='js/style.js') }}"></script>
+{% endblock %}

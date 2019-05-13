@@ -1,0 +1,53 @@
+{% extends "admin/base.html" %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block content %}
+	<div class="jumbotron">
+		<div class="container">
+			<h1>重置</h1>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 offset-md-3">
+				<form method="POST" id="reset-ctf-form">
+					<div class="alert alert-danger" role="alert">
+						<p>
+							重置CTF将删除所有用户和团队数据。在重置之前要仔细考虑，因为没有进行自动备份，所有非题目数据都会丢失。.
+						</p>
+
+						<span>
+							<strong>
+								创建所需的所有数据的备份 <a href="{{ url_for('admin.config', _anchor='backup') }}">创建CTFD导出</a>
+								或者通过复制数据库和ctfd源代码文件夹。
+							</strong>
+						</span>
+					</div>
+
+					<input id="nonce" type="hidden" name="nonce" value="{{ nonce }}">
+
+					<button class="btn btn-warning btn-lg btn-block">
+						重置
+					</button>
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block scripts %}
+	<script>
+		$('#reset-ctf-form').submit(function(e){
+			e.preventDefault();
+			ezq({
+				title: "Reset CTF?",
+				body: "Are you sure you want to reset your CTFd instance?",
+				success: function () {
+					$('#reset-ctf-form').off('submit').submit();
+				}
+			});
+		});
+	</script>
+{% endblock %}
